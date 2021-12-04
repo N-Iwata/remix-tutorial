@@ -15,16 +15,12 @@ export const action: ActionFunction = async ({ request }) => {
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
 
-  const errors: NewPostErrors = {
-    title: false,
-    slug: false,
-    markdown: false,
-  };
+  const errors: NewPostErrors = {};
   if (!title) errors.title = true;
   if (!slug) errors.slug = true;
   if (!markdown) errors.markdown = true;
 
-  if (errors.title || errors.slug || errors.markdown) {
+  if (Object.keys(errors).length) {
     return errors;
   }
   invariant(typeof title === "string");

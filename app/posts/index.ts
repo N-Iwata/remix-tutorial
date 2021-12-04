@@ -15,9 +15,7 @@ type NewPost = {
   markdown: string;
 };
 export type NewPostErrors = {
-  title: boolean;
-  slug: boolean;
-  markdown: boolean;
+  [error: string]: boolean;
 };
 
 export type PostMarkdownAttributes = {
