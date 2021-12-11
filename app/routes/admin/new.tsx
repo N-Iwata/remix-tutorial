@@ -5,8 +5,14 @@ import {
   useActionData,
   useTransition,
 } from "remix";
-import { createPost, NewPostErrors } from "~/posts";
+import { createPost } from "~/posts";
 import invariant from "tiny-invariant";
+
+type PostErrors = {
+  title?: boolean;
+  slug?: boolean;
+  markdown?: boolean;
+};
 
 export const action: ActionFunction = async ({ request }) => {
   await new Promise((res) => setTimeout(res, 1000));
@@ -15,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
 
-  const errors: NewPostErrors = {};
+  const errors: PostErrors = {};
   if (!title) errors.title = true;
   if (!slug) errors.slug = true;
   if (!markdown) errors.markdown = true;
